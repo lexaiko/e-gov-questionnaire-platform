@@ -6,12 +6,20 @@
         "dev": "vite"
     },
     "devDependencies": {
+        "@vitejs/plugin-react": "^4.7.0",
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.47",
-        "tailwindcss": "^3.4.13",
-        "vite": "^7.0.6"
+        "tailwindcss": "^3.4.13"
+    },
+    "dependencies": {
+        "@inertiajs/react": "^2.0.17",
+        "flowbite": "^3.1.2",
+        "flowbite-react": "^0.12.5",
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1",
+        "vite": "^6.0.0"
     }
 }
