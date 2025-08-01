@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\KuisionerController;
 
 Route::middleware('guest:pengguna')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -16,7 +17,11 @@ Route::middleware('guest:pengguna')->group(function () {
 
 Route::middleware('auth:pengguna')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('pengguna.logout');
-    Route::get('/dashboard', fn () => inertia('Auth/Dashboard', ['name' => Auth::user()->name]))->name('pengguna.dashboard');
+    Route::get('/dashboard', [KuisionerController::class, 'dashboard'])->name('pengguna.dashboard');
+    Route::get('/kuisioner', [KuisionerController::class, 'index'])->name('kuisioner.index');
+    Route::post('/kuisioner', [KuisionerController::class, 'store'])->name('kuisioner.store');
+    Route::get('/kuisioner/hasil/{id}', [KuisionerController::class, 'hasil'])->name('kuisioner.hasil');
+    Route::get('/kuisioner/hasil/{id}/download', [KuisionerController::class, 'download'])->name('kuisioner.download');
 });
 
 

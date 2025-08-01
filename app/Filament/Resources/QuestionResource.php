@@ -94,6 +94,8 @@ class QuestionResource extends Resource
                 Tables\Columns\TextColumn::make('pertanyaan')
                     ->label('Pertanyaan')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('order')
+                    ->label('Urutan'),
                 Tables\Columns\TextColumn::make('answers_count')
                     ->counts('answers')
                     ->label('Jumlah Jawaban'),
@@ -111,7 +113,9 @@ class QuestionResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('order');
+
     }
 
     public static function getRelations(): array
