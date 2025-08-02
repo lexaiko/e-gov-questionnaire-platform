@@ -5,9 +5,11 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Result;
+use App\Exports\ResultExport;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Infolists\Components;
+use Maatwebsite\Excel\Facades\Excel;
 use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\ResultResource\Pages;
 
@@ -43,10 +45,10 @@ class ResultResource extends Resource
             TextColumn::make('result_details_count')
     ->counts('resultDetails')
     ->label('Jumlah Jawaban')
-    ->sortable()
-                ->default(0) // Set default to 0 if no related resultDetails
-                ->sortable(),
-            Tables\Columns\TextColumn::make('skor_total'),
+    ->formatStateUsing(fn ($state) => "{$state} Jawaban")
+                ->default(0),
+            Tables\Columns\TextColumn::make('skor_total')
+                ->formatStateUsing(fn ($state) => "{$state} %"),
             Tables\Columns\TextColumn::make('hasil'),
             Tables\Columns\TextColumn::make('created_at')->dateTime('d M Y H:i'),
         ])
@@ -54,6 +56,13 @@ class ResultResource extends Resource
             Tables\Actions\ViewAction::make(),
             Tables\Actions\EditAction::make(),
             Tables\Actions\DeleteAction::make(),
+            Tables\Actions\Action::make('export_excel')
+    ->label('Export Excel')
+    ->url(fn (Result $record): string => route('kuisioner.admin.download', ['id' => $record->id]))
+    ->icon('heroicon-o-arrow-down-tray')
+    ->hidden(fn (): bool => !auth()->user()->hasPermissionTo('view_result'))
+    ->openUrlInNewTab()
+
         ])
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([

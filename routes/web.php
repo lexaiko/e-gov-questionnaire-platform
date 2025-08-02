@@ -24,6 +24,12 @@ Route::middleware('auth:pengguna')->group(function () {
     Route::get('/kuisioner/hasil/{id}/download', [KuisionerController::class, 'download'])->name('kuisioner.download');
 });
 
+Route::middleware(['auth:web', 'can:view_result'])->group(function () {
+    Route::get('/admin/result/{id}/download', [KuisionerController::class, 'exportAdmin'])->name('kuisioner.admin.download');
+    Route::get('/admin/result/download', [KuisionerController::class, 'exportAllResults'])->name('kuisioner.export.all');
+
+});
+
 
 Route::get('/', function () {
     if (Auth::guard('pengguna')->check()) {

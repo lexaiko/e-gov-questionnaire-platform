@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ResultExport;
+use App\Exports\ResultAllExport;
 class KuisionerController extends Controller
 {
 
@@ -26,6 +27,22 @@ public function download($id)
       ->firstOrFail();
 
     return Excel::download(new ResultExport($result), 'hasil_kuisioner.xlsx');
+}
+public function exportAdmin($id)
+{
+    $result = Result::with([
+        'pengguna',
+        'resultDetails.question',
+        'resultDetails.answer',
+    ])->where('id', $id)
+      ->firstOrFail();
+
+    return Excel::download(new ResultExport($result), "hasil_{$result->pengguna->name}.xlsx");
+}
+
+public function exportAllResults()
+{
+    return Excel::download(new ResultAllExport(), 'semua_hasil_kuisioner.xlsx');
 }
     public function index()
     {

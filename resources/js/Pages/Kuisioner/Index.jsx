@@ -39,7 +39,7 @@ export default function Kuisioner({ questions }) {
                 ...data.answers,
                 [currentQuestion.id]: answer.id
               })}
-            /> {answer.jawaban} (bobot: {answer.bobot})
+            /> {answer.jawaban}
           </label>
         ))}
       </div>
