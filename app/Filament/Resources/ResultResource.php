@@ -45,7 +45,12 @@ class ResultResource extends Resource
             TextColumn::make('index')
                 ->label('No')
                 ->rowIndex(),
-            Tables\Columns\TextColumn::make('pengguna.name')->label('Nama Pengguna'),
+            Tables\Columns\TextColumn::make('pengguna.name')->label('Nama Pengguna')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('pengguna.email')->label('Email Pengguna')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('pengguna.profilUsaha.nama_usaha')->label('Nama Usaha')
+                ->searchable(),
             TextColumn::make('result_details_count')
     ->counts('resultDetails')
     ->label('Jumlah Jawaban')
@@ -57,15 +62,15 @@ class ResultResource extends Resource
             Tables\Columns\TextColumn::make('created_at')->dateTime('d M Y H:i'),
         ])
         ->actions([
-            Tables\Actions\ViewAction::make(),
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
             Tables\Actions\Action::make('export_excel')
     ->label('Export Excel')
     ->url(fn (Result $record): string => route('kuisioner.admin.download', ['id' => $record->id]))
     ->icon('heroicon-o-arrow-down-tray')
     ->hidden(fn (): bool => !auth()->user()->hasPermissionTo('view_result'))
-    ->openUrlInNewTab()
+    ->openUrlInNewTab(),
+            Tables\Actions\ViewAction::make(),
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
 
         ])
         ->bulkActions([
@@ -82,7 +87,12 @@ class ResultResource extends Resource
         return $infolist->schema([
             Components\Section::make('Informasi Umum')
                 ->schema([
-                    Components\TextEntry::make('pengguna.nama')->label('Nama Pengguna'),
+                    Components\TextEntry::make('pengguna.name')->label('Nama Pengguna'),
+                    Components\TextEntry::make('pengguna.email')->label('Email Pengguna'),
+                    Components\TextEntry::make('pengguna.profilUsaha.nama_usaha')->label('Nama Usaha'),
+                    Components\TextEntry::make('pengguna.profilUsaha.tahun_bergabung')->label('Tahun Bergabung'),
+                    Components\TextEntry::make('pengguna.profilUsaha.kecamatan')->label('Kecamatan'),
+                    Components\TextEntry::make('pengguna.profilUsaha.nama_pendamping')->label('Nama Pendamping'),
                     Components\TextEntry::make('skor_total'),
                     Components\TextEntry::make('hasil'),
                     Components\TextEntry::make('created_at')->dateTime('d M Y H:i'),
