@@ -19,6 +19,12 @@ export default function Kuisioner({ questions }) {
     }
   };
 
+  const handleBack = () => {
+    if (step > 0) {
+      setStep((s) => s - 1);
+    }
+  };
+
   if (completed) return <div className="p-4 text-green-600">Kuisioner selesai, silakan cek hasilnya di halaman hasil.</div>;
 
   const currentQuestion = questions[step];
@@ -43,13 +49,23 @@ export default function Kuisioner({ questions }) {
           </label>
         ))}
       </div>
-      <button
-        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded"
-        onClick={handleNext}
-        disabled={processing || !data.answers[currentQuestion.id]}
-      >
-        {step === questions.length - 1 ? 'Selesai' : 'Lanjut' }
-      </button>
+      <div className="flex justify-between">
+        <button
+          className="mt-6 bg-gray-500 text-white px-4 py-2 rounded"
+          onClick={handleBack}
+          disabled={processing || step === 0}
+        >
+          Kembali
+        </button>
+        <button
+          className="mt-6 bg-yellow-500 text-white px-4 py-2 rounded"
+          onClick={handleNext}
+          disabled={processing || !data.answers[currentQuestion.id]}
+        >
+          {step === questions.length - 1 ? 'Selesai' : 'Lanjut' }
+        </button>
+      </div>
     </div>
   );
 }
+

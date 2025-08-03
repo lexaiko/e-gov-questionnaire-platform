@@ -1,8 +1,8 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
-import flowbiteReact from "flowbite-react/plugin/tailwindcss";
 
 /** @type {import('tailwindcss').Config} */
 export default {
+     darkMode: false,
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -19,5 +19,4 @@ export default {
             },
         },
     },
-    plugins: [flowbiteReact],
 };

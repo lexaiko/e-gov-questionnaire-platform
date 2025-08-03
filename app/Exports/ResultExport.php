@@ -5,6 +5,7 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
+
 class ResultExport implements FromArray, WithHeadings
 {
     protected $result;
@@ -16,7 +17,7 @@ class ResultExport implements FromArray, WithHeadings
 
     public function headings(): array
     {
-        $headers = ['Nama', 'Email'];
+        $headers = ['Nama', 'Email', 'Nama Usaha', 'Tahun Bergabung', 'Kecamatan', 'Nama Pendamping'];
         foreach ($this->result->resultDetails as $index => $detail) {
             $headers[] = 'Jawaban ' . ($index + 1);
         }
@@ -30,6 +31,10 @@ class ResultExport implements FromArray, WithHeadings
         $row = [
             $this->result->pengguna->name,
             $this->result->pengguna->email,
+            $this->result->pengguna->profilUsaha->nama_usaha,
+            $this->result->pengguna->profilUsaha->tahun_bergabung,
+            $this->result->pengguna->profilUsaha->kecamatan,
+            $this->result->pengguna->profilUsaha->nama_pendamping,
         ];
 
         foreach ($this->result->resultDetails as $detail) {

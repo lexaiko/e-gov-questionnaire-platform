@@ -2,9 +2,9 @@
 export default function HasilKuisioner({ result }) {
     return (
         <div className="max-w-3xl mx-auto p-6">
-            <h1 className="text-3xl font-bold">Hasil Kuisioner</h1>
-            <div className="flex items-center justify-between mb-6 bg-white shadow rounded-lg p-4">
-                <div className="">
+            <h1 className="text-3xl font-bold text-yellow-500">Hasil Assesment</h1>
+            <div className="flex items-center justify-between mb-6 shadow rounded-lg p-4">
+                <div className="flex-1">
                     <p>
                         <strong>Nama:</strong> {result.pengguna.name}
                     </p>
@@ -33,13 +33,13 @@ export default function HasilKuisioner({ result }) {
                             id: result.id,
                         }))
                     }
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
                 >
                     Download Hasil
                 </button>
             </div>
 
-            <div className="bg-white shadow rounded-lg p-4">
+            <div className="shadow rounded-lg p-4">
                 <h2 className="text-lg font-semibold mb-4">Jawaban Anda</h2>
                 <ul className="space-y-4">
                     {result.result_details.map((detail, index) => (
@@ -50,8 +50,7 @@ export default function HasilKuisioner({ result }) {
                             </p>
                             <p>
                                 <strong>Jawaban:</strong>{" "}
-                                {detail.answer.jawaban} (bobot:{" "}
-                                {detail.answer.bobot})
+                                {detail.answer.jawaban}
                             </p>
                         </li>
                     ))}
@@ -60,3 +59,4 @@ export default function HasilKuisioner({ result }) {
         </div>
     );
 }
+

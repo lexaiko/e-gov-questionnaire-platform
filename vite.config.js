@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import laravel, { refreshPaths } from "laravel-vite-plugin";
 import react from "@vitejs/plugin-react";
 import { resolve } from 'node:path';
-import flowbiteReact from "flowbite-react/plugin/vite";
 
 export default defineConfig({
     plugins: [laravel({
@@ -13,7 +12,8 @@ export default defineConfig({
             "app/Filament/**",
             "app/Providers/**",
         ],
-    }), react(), flowbiteReact()],
+    }), react(),
+],
     resolve: {
         alias: {
             "@": "/resources/js",

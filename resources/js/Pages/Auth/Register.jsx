@@ -1,10 +1,8 @@
-// resources/js/Pages/Auth/Register.jsx
 import { Link } from '@inertiajs/react';
-import { route } from 'ziggy-js';
 import { useForm } from '@inertiajs/react';
 
 
-export default function Register() {
+export default function Register({ flash }) {
   const { data, setData, post, processing, errors } = useForm({
     name: '',
     email: '',
@@ -30,13 +28,17 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    post(route('register'), data);
+    post(route('auth.register.submit'), data);
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Register E-Questionnaire</h2>
+        <h2 className="text-2xl font-bold mb-4">Register Self Assessment</h2>
+
+        {flash.message && <p className="text-green-500 text-sm mb-4">{flash.message}</p>}
+        {flash.success && <p className="text-green-500 text-sm mb-4">{flash.success}</p>}
+        {flash.error && <p className="text-red-500 text-sm mb-4">{flash.error}</p>}
 
         <div className="mb-4">
           <label>Nama</label>
@@ -98,7 +100,7 @@ export default function Register() {
           className="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
           disabled={processing}
         >
-          Daftar
+          Lanjut
         </button>
       </form>
     </div>

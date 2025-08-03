@@ -16,7 +16,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Login E-Questionnaire</h2>
+        <h2 className="text-2xl font-bold mb-4">Login Self Assessment</h2>
 
         <div className="mb-4">
           <label>Email</label>
@@ -51,7 +51,7 @@ export default function Login() {
         </button>
 
         <p className="text-center mt-4">
-          Belum memiliki akun? <Link href={route('register')} className="text-blue-600 hover:text-blue-700">Klik disini</Link>
+          Belum memiliki akun? <Link href={route('auth.register.submit')} className="text-blue-600 hover:text-blue-700">Klik disini</Link>
         </p>
       </form>
     </div>

@@ -12,4 +12,9 @@ class Pengguna extends Authenticatable
     {
         return $this->hasMany(Result::class);
     }
+    public function profilUsaha()
+{
+    return $this->hasOne(ProfilUsaha::class, 'pengguna_id');
+}
+
 }

@@ -16,6 +16,7 @@ class ResultAllExport implements FromArray, WithHeadings
         // Eager load relasi biar hemat query
         $this->results = Result::with([
             'pengguna',
+            'pengguna.profilUsaha', // tambahkan profil usaha
             'resultDetails.answer',
         ])->get();
     }
@@ -25,7 +26,7 @@ class ResultAllExport implements FromArray, WithHeadings
         // Ambil jumlah soal dari database
         $totalSoal = Question::count();
 
-        $headers = ['Nama', 'Email'];
+        $headers = ['Nama', 'Email', 'Nama Usaha', 'Tahun Bergabung', 'Kecamatan', 'Nama Pendamping'];
         for ($i = 1; $i <= $totalSoal; $i++) {
             $headers[] = 'Jawaban ' . $i;
         }
@@ -42,6 +43,10 @@ class ResultAllExport implements FromArray, WithHeadings
             $row = [
                 $result->pengguna->name,
                 $result->pengguna->email,
+                $result->pengguna->profilUsaha->nama_usaha,
+                $result->pengguna->profilUsaha->tahun_bergabung,
+                $result->pengguna->profilUsaha->kecamatan,
+                $result->pengguna->profilUsaha->nama_pendamping,
             ];
 
             // Jawaban berdasarkan jumlah soal
@@ -63,4 +68,5 @@ class ResultAllExport implements FromArray, WithHeadings
         return $data;
     }
 }
+
 

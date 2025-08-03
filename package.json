@@ -16,8 +16,6 @@
     },
     "dependencies": {
         "@inertiajs/react": "^2.0.17",
-        "flowbite": "^3.1.2",
-        "flowbite-react": "^0.12.5",
         "react": "^19.1.1",
         "react-dom": "^19.1.1",
         "vite": "^6.0.0"

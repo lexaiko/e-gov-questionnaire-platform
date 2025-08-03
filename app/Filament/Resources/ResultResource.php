@@ -18,6 +18,10 @@ class ResultResource extends Resource
     protected static ?string $model = Result::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
+    protected static ?string $navigationLabel = 'Hasil';
+    protected static ?string $pluralModelLabel = 'Hasil';
+    protected static ?string $slug = 'hasil';
+    protected static ?string $navigationGroup = 'Master Data';
 
     public static function form(Forms\Form $form): Forms\Form
     {

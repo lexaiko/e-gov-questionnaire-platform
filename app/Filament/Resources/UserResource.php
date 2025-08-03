@@ -30,6 +30,12 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?string $navigationGroup = 'Master Data';
+
+    protected static ?string $navigationLabel = 'Administrator';
+    protected static ?string $pluralModelLabel = 'Administrator';
+    protected static ?string $slug = 'administrator';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -104,18 +110,10 @@ class UserResource extends Resource
                 // Impersonate::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->headerActions([
-                ExportAction::make()
-                    ->exporter(UserExporter::class),
-                ImportAction::make()
-                    ->importer(UserImporter::class)
-            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-                ExportBulkAction::make()
-                    ->exporter(UserExporter::class)
             ]);
     }
 

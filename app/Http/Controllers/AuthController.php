@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Pengguna;
+use App\Models\ProfilUsaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -16,11 +20,21 @@ class AuthController extends Controller
     {
         return inertia('Auth/Login');
     }
+    public function showRegister()
+    {
+        return Inertia::render('Auth/Register');
+    }
+
 
     public function showRegisterForm()
     {
         return inertia('Auth/Register'); // ⬅️ path ke form register
     }
+    public function showProfilForm()
+    {
+        return Inertia::render('Auth/Profil');
+    }
+
 
     public function login(Request $request)
     {
@@ -39,24 +53,75 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
-    {
-        $data = $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'email', 'unique:penggunas,email'],
-            'password' => ['required', 'min:6', 'confirmed'],
+
+
+public function register(Request $request)
+{
+    $validated = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'unique:penggunas,email'],
+        'password' => ['required', 'min:6', 'confirmed'],
+    ]);
+
+    // Simpan data akun ke session dulu
+    Session::put('register_data', [
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => $validated['password'], // belum di-hash dulu, nanti pas insert
+    ]);
+
+    return redirect()->route('auth.profil.form');
+}
+
+public function storeProfil(Request $request)
+{
+    $request->validate([
+        'nama_usaha'      => 'required|string|max:255',
+        'tahun_bergabung' => 'required|date',
+        'kecamatan'       => 'required|string|max:255',
+        'nama_pendamping' => 'required|string|max:255',
+    ]);
+
+    // Ambil data akun dari session
+    $akun = Session::get('register_data');
+
+    if (!$akun) {
+        return redirect()->route('auth.register')->withErrors(['error' => 'Data akun tidak ditemukan. Silakan daftar ulang.']);
+    }
+
+    // dd($akun, $request->all());
+
+
+    DB::beginTransaction();
+
+    try {
+        $pengguna = Pengguna::create([
+            'name' => $akun['name'],
+            'email' => $akun['email'],
+            'password' => Hash::make($akun['password']),
         ]);
 
-        $pengguna = Pengguna::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        ProfilUsaha::create([
+            'nama_usaha'      => $request->nama_usaha,
+            'tahun_bergabung' => $request->tahun_bergabung,
+            'kecamatan'       => $request->kecamatan,
+            'nama_pendamping' => $request->nama_pendamping,
+            'pengguna_id'     => $pengguna->id,
         ]);
+// dd($request->all());
+
+
+        DB::commit();
+        Session::forget('register_data'); // hapus session setelah selesai
 
         Auth::guard('pengguna')->login($pengguna);
-
-        return redirect()->route('pengguna.dashboard');
+        return redirect()->route('pengguna.dashboard')->with('success', 'Akun dan profil usaha berhasil dibuat!');;
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->route('auth.profil.form')->withErrors(['error' => 'Gagal menyimpan data.']);
     }
+}
+
 
     public function logout(Request $request)
     {

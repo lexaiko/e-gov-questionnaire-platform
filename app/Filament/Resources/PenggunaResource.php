@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Pengguna;
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\Pengguna;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\PenggunaResource\Pages;
@@ -21,7 +22,7 @@ class PenggunaResource extends Resource
     protected static ?string $navigationLabel = 'Pengguna';
     protected static ?string $pluralModelLabel = 'Pengguna';
     protected static ?string $slug = 'pengguna';
-
+    protected static ?string $navigationGroup = 'Master Data';
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -39,6 +40,16 @@ class PenggunaResource extends Resource
             TextColumn::make('index')
                 ->label('No')
                 ->rowIndex(),
+            Tables\Columns\ImageColumn::make('avatar_url')
+                        ->searchable()
+                        ->circular()
+                        ->grow(false)
+                        ->getStateUsing(fn($record) => $record->avatar_url
+                            ? $record->avatar_url
+                            : "https://ui-avatars.com/api/?name=" . urlencode($record->name)),
+            Tables\Columns\TextColumn::make('name')
+                        ->searchable()
+                        ->weight(FontWeight::Bold),
             TextColumn::make('name')->sortable()->searchable(),
             TextColumn::make('email')->sortable()->searchable(),
             TextColumn::make('created_at')->label('Dibuat')->dateTime('d M Y H:i'),
@@ -46,7 +57,10 @@ class PenggunaResource extends Resource
             Tables\Actions\ViewAction::make(), // <-- VIEW
             Tables\Actions\EditAction::make(),
             Tables\Actions\DeleteAction::make(),
+        ])->bulkActions([
+            Tables\Actions\DeleteBulkAction::make(),
         ]);
+
     }
 
     public static function getPages(): array
