@@ -70,7 +70,7 @@ public function register(Request $request)
         'password' => $validated['password'], // belum di-hash dulu, nanti pas insert
     ]);
 
-    return redirect()->route('auth.profil.form');
+    return redirect()->route('auth.profil.form')->with('success', 'Silakan lengkapi profil usaha Anda.');
 }
 
 public function storeProfil(Request $request)
@@ -86,7 +86,8 @@ public function storeProfil(Request $request)
     $akun = Session::get('register_data');
 
     if (!$akun) {
-        return redirect()->route('auth.register')->withErrors(['error' => 'Data akun tidak ditemukan. Silakan daftar ulang.']);
+        $error = 'Data akun tidak ditemukan. Silakan daftar ulang.';
+        return redirect()->route('auth.register')->with('error', 'Data akun tidak ditemukan. Silakan daftar ulang.');
     }
 
     // dd($akun, $request->all());
@@ -118,7 +119,7 @@ public function storeProfil(Request $request)
         return redirect()->route('pengguna.dashboard')->with('success', 'Akun dan profil usaha berhasil dibuat!');;
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect()->route('auth.profil.form')->withErrors(['error' => 'Gagal menyimpan data.']);
+        return redirect()->route('auth.profil.form')->with(['error' => 'Gagal menyimpan data.']);
     }
 }
 

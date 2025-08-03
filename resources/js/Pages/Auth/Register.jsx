@@ -1,8 +1,9 @@
 import { Link } from '@inertiajs/react';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 
 
-export default function Register({ flash }) {
+export default function Register() {
+const { flash } = usePage().props;
   const { data, setData, post, processing, errors } = useForm({
     name: '',
     email: '',

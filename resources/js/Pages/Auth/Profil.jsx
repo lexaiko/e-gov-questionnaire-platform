@@ -76,7 +76,7 @@ export default function Profil() {
 
         <button
           type="submit"
-          className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition duration-300"
+          className="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition duration-300"
           disabled={processing}
         >
           Simpan
