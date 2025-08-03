@@ -3,8 +3,6 @@ import { route } from 'ziggy-js';
 
 export default function Dashboard({ name, results }) {
   const { flash } = usePage().props;
-
-  console.log('Dashboard results:', results);
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto p-8">

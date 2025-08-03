@@ -23,3 +23,5 @@ yarn-error.log
 /.zed
 /.devbox
 devbox*
+/storage/framework/*
+!storage/framework/.gitignore
