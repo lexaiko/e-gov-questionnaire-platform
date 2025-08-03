@@ -2,7 +2,7 @@
 export default function HasilKuisioner({ result }) {
     return (
         <div className="max-w-3xl mx-auto p-6">
-            <h1 className="text-3xl font-bold text-yellow-500">Hasil Assesment</h1>
+            <h1 className="text-2xl font-bold text-yellow-500">Hasil Assesment</h1>
             <div className="flex items-center justify-between mb-6 shadow rounded-lg p-4">
                 <div className="flex-1">
                     <p>
@@ -18,7 +18,9 @@ export default function HasilKuisioner({ result }) {
                         <strong>Hasil:</strong>{" "}
                         <span
                             className={
-                                result.skor_total < 50
+                                result.skor_total < 40
+                                    ? "text-red-600"
+                                    : result.skor_total < 68
                                     ? "text-yellow-600"
                                     : "text-green-600"
                             }

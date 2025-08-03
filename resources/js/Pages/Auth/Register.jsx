@@ -93,7 +93,7 @@ const { flash } = usePage().props;
         </div>
 
         <p className="text-center">
-          Sudah memiliki akun? <Link href={route('login')} className="text-blue-500 hover:underline">Klik disini</Link>
+          Sudah memiliki akun? <Link href={route('login')} className="text-blue-500">Klik disini</Link>
         </p>
 
         <button

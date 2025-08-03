@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KuisionerController;
 
 Route::middleware('guest:pengguna')->group(function () {
@@ -29,6 +30,12 @@ Route::middleware('auth:pengguna')->group(function () {
     Route::post('/kuisioner', [KuisionerController::class, 'store'])->name('kuisioner.store');
     Route::get('/kuisioner/hasil/{id}', [KuisionerController::class, 'hasil'])->name('kuisioner.hasil');
     Route::get('/kuisioner/hasil/{id}/download', [KuisionerController::class, 'download'])->name('kuisioner.download');
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
+    Route::get('/profil/edit-akun', [ProfilController::class, 'editAkun'])->name('profil.edit.akun');
+    Route::put('/profil/edit-akun', [ProfilController::class, 'updateAkun'])->name('profil.update.akun');
+
+    Route::get('/profil/edit-usaha', [ProfilController::class, 'editUsaha'])->name('profil.edit.usaha');
+    Route::put('/profil/edit-usaha', [ProfilController::class, 'updateUsaha'])->name('profil.update.usaha');
 });
 
 Route::middleware(['auth:web', 'can:view_result'])->group(function () {

@@ -35,36 +35,35 @@ export default function Layout({ children }) {
                             {/* Mobile Auth Button */}
                             <div className="md:hidden">
                                 {user ? (
-    <Link
-                                    href={route("pengguna.dashboard")}
-                                    className="bg-transparent border border-yellow-500 text-yellow-500 text-sm font-semibold px-5 py-2 rounded-lg shadow flex items-center gap-3"
-                                >
-                                    <img
-                                        src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                            user.name
-                                        )}`}
-                                        alt="User Avatar"
-                                        className="w-8 h-8 rounded-full"
-                                    />
-                                    <span className="whitespace-nowrap">
-                                        {user.name}
-                                    </span>
-                                </Link>
-) : (
-    <Link
-        href={route("auth.register.submit")}
-        className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow"
-    >
-        Daftar
-    </Link>
-)}
-
+                                    <Link
+                                        href={route("profil.index")}
+                                        className="bg-transparent border border-yellow-500 text-yellow-500 text-sm font-semibold px-5 py-2 rounded-lg shadow flex items-center gap-3"
+                                    >
+                                        <img
+                                            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+                                                user.name
+                                            )}`}
+                                            alt="User Avatar"
+                                            className="w-8 h-8 rounded-full"
+                                        />
+                                        <span className="whitespace-nowrap">
+                                            {user.name}
+                                        </span>
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        href={route("auth.register.submit")}
+                                        className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow"
+                                    >
+                                        Daftar
+                                    </Link>
+                                )}
                             </div>
 
                             {/* Burger */}
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="md:hidden text-gray-700 hover:text-yellow-600 focus:outline-none"
+                                className="md:hidden text-black hover:text-black focus:outline-none"
                             >
                                 <svg
                                     className="w-6 h-6"
@@ -105,6 +104,21 @@ export default function Layout({ children }) {
                             >
                                 Home
                             </Link>
+                            {user && (
+                                <Link
+                                    href={route("profil.index")}
+                                    className={`text-sm font-medium transition ${
+                                        route().current("profil.index") ||
+                                        route().current("profil.edit.akun") ||
+                                        route().current("profil.edit.usaha")
+                                            ? "text-yellow-600"
+                                            : "text-gray-700 hover:text-yellow-700"
+                                    }`}
+                                >
+                                    Profil
+                                </Link>
+                            )}
+
                             <Link
                                 href="#about"
                                 className="text-sm font-medium text-gray-700 hover:text-yellow-700 transition"
@@ -117,7 +131,7 @@ export default function Layout({ children }) {
                         <div className="hidden md:flex items-center space-x-4 ml-6">
                             {user ? (
                                 <Link
-                                    href={route("pengguna.dashboard")}
+                                    href={route("profil.index")}
                                     className="bg-transparent border border-yellow-500 text-yellow-500 text-sm font-semibold px-5 py-2 rounded-lg shadow flex items-center gap-3"
                                 >
                                     <img
@@ -147,10 +161,28 @@ export default function Layout({ children }) {
                         <div className="md:hidden pb-4 space-y-2">
                             <Link
                                 href={route("landing")}
-                                className="block text-sm font-medium px-4 py-2 rounded text-gray-700 hover:bg-gray-100"
+                                className={`block text-sm font-medium px-4 py-2 rounded ${
+                                    route().current("landing") || route().current("pengguna.dashboard")
+                                        ? "text-yellow-500 bg-gray-100"
+                                        : "text-gray-700 hover:bg-gray-100"
+                                }`}
                             >
                                 Home
                             </Link>
+                            {user && (
+                                <Link
+                                    href={route("profil.index")}
+                                    className={`block text-sm font-medium px-4 py-2 rounded ${
+                                        route().current("profil.index") ||
+                                        route().current("profil.edit.akun") ||
+                                        route().current("profil.edit.usaha")
+                                            ? "text-yellow-500 bg-gray-100"
+                                            : "text-gray-700 hover:bg-gray-100"
+                                    }`}
+                                >
+                                    Profil
+                                </Link>
+                            )}
                             <Link
                                 href="#about"
                                 className="block text-sm font-medium px-4 py-2 rounded text-gray-700 hover:bg-gray-100"
@@ -200,3 +232,4 @@ export default function Layout({ children }) {
         </>
     );
 }
+

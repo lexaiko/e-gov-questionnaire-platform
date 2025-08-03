@@ -102,7 +102,7 @@ public function exportAllResults()
 
             // 3. Kalkulasi final skor & hasil
             $finalSkor = round($totalSkor / $jumlahSoal, 2);
-            $hasil = $finalSkor < 40 ? 'Kurang' : ($finalSkor < 68 ? 'Baik' : 'Cukup');
+            $hasil = $finalSkor < 40 ? 'Kurang' : ($finalSkor < 68 ? 'Cukup' : 'Baik');
 
             // 4. Update result
             $result->update([

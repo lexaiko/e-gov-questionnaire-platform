@@ -52,10 +52,16 @@ export default function Kuisioner({ questions }) {
       <div className="flex justify-between">
         <button
           className="mt-6 bg-gray-500 text-white px-4 py-2 rounded"
-          onClick={handleBack}
-          disabled={processing || step === 0}
+          onClick={() => {
+            if (step === 0) {
+              window.location.href = route('pengguna.dashboard');
+            } else {
+              handleBack();
+            }
+          }}
+          disabled={processing}
         >
-          Kembali
+          {step === 0 ? 'Kembali' : 'Sebelumnya'}
         </button>
         <button
           className="mt-6 bg-yellow-500 text-white px-4 py-2 rounded"

@@ -58,7 +58,7 @@ export default function Dashboard({ name, results }) {
                   <tr>
                     <th className="py-3 px-4 border">#</th>
                     <th className="py-3 px-4 border">Tanggal</th>
-                    <th className="py-3 px-4 border">Skor (%)</th>
+                    <th className="py-3 px-4 border whitespace-nowrap">Skor (%)</th>
                     <th className="py-3 px-4 border">Hasil</th>
                     <th className="py-3 px-4 border">Aksi</th>
                   </tr>
@@ -68,19 +68,34 @@ export default function Dashboard({ name, results }) {
                     <tr key={result.id} className="text-sm text-gray-800 hover:bg-gray-50">
                       <td className="py-3 px-4 border">{index + 1}</td>
                       <td className="py-3 px-4 border">{new Date(result.created_at).toLocaleDateString()}</td>
-                      <td className="py-3 px-4 border">
+                      <td className="py-3 px-4 border whitespace-nowrap">
                         <span
                           className="inline-block w-4 h-4 mr-2 rounded-full"
-                          style={{ backgroundColor: result.skor_total < 40 ? 'red' : result.skor_total < 68 ? 'yellow' : 'green' }}
+                          style={{
+                            backgroundColor:
+                              result.skor_total < 40
+                                ? 'red'
+                                : result.skor_total < 68
+                                ? 'yellow'
+                                : 'green',
+                          }}
                         />
-                        {result.skor_total}
+                        {result.skor_total} %
                       </td>
                       <td className="py-3 px-4 border">{result.hasil}</td>
                       <td className="py-3 px-4 border">
                         <Link
                           href={route('kuisioner.hasil', { id: result.id })}
-                          className="text-blue-600 hover:underline"
+                          className="text-blue-600 flex items-center"
                         >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-1"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M10 2C6.686 2 4 4.686 4 8c0 3.314 2.686 6 6 6s6-2.686 6-6c0-3.314-2.686-6-6-6zm0 11c-2.761 0-5-2.239-5-5s2.239-5 5-5 5 2.239 5 5-2.239 5-5 5zm0-9c-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4-1.791-4-4-4z" />
+                          </svg>
                           Lihat Hasil
                         </Link>
                       </td>
