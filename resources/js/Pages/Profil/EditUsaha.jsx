@@ -35,23 +35,26 @@ export default function EditUsaha({ profilUsaha }) {
                 </div>
 
                 <div className="mb-4">
-                    <label>Tahun Bergabung</label>
-                    <input
-                        type="number"
-                        className="w-full p-2 border rounded"
-                        value={data.tahun_bergabung}
-                        onChange={(e) =>
-                            setData("tahun_bergabung", e.target.valueAsNumber)
-                        }
-                        maxLength={4}
-                        required
-                    />
-                    {errors.tahun_bergabung && (
-                        <p className="text-red-500 text-sm">
-                            {errors.tahun_bergabung}
-                        </p>
-                    )}
-                </div>
+  <label>Tahun Bergabung</label>
+  <input
+    type="number"
+    className="w-full p-2 border rounded"
+    value={data.tahun_bergabung}
+    onChange={(e) => {
+      const value = e.target.value;
+      // Cuma angka dan maksimal 4 digit
+      if (value.length <= 4 && /^\d*$/.test(value)) {
+        setData('tahun_bergabung', value);
+      }
+    }}
+    required
+    placeholder="contoh: 2024"
+  />
+  {errors.tahun_bergabung && (
+    <p className="text-red-500 text-sm">{errors.tahun_bergabung}</p>
+  )}
+</div>
+
 
                 <div className="flex flex-col">
                     <label className="mb-2 font-medium">Kecamatan</label>

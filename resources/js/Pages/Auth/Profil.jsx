@@ -44,7 +44,8 @@ export default function Profil() {
             type="number"
             className="w-full p-2 border rounded"
             value={data.tahun_bergabung}
-            onChange={(e) => setData('tahun_bergabung', e.target.valueAsNumber)}
+            onChange={(e) => setData('tahun_bergabung', parseInt(e.target.value, 10))}
+            minLength={4}
             maxLength={4}
             required
           />

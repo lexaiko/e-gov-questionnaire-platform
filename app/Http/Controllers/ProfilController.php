@@ -69,7 +69,7 @@ class ProfilController extends Controller
     {
         $request->validate([
             'nama_usaha' => 'required',
-            'tahun_bergabung' => 'required|date_format:Y',
+            'tahun_bergabung' => 'required|digits:4|integer|min:1900|max:' . date('Y'),
             'kecamatan' => 'required',
             'nama_pendamping' => 'required',
         ]);

@@ -77,7 +77,7 @@ public function storeProfil(Request $request)
 {
     $request->validate([
         'nama_usaha'      => 'required|string|max:255',
-        'tahun_bergabung' => 'required|date_format:Y',
+        'tahun_bergabung' => 'required|digits:4|integer|min:1900|max:' . date('Y'),
         'kecamatan'       => 'required|string|max:255',
         'nama_pendamping' => 'required|string|max:255',
     ]);
