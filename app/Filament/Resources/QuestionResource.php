@@ -19,6 +19,8 @@ use App\Filament\Resources\QuestionResource\Pages;
 use Filament\Infolists\Components\RepeatableEntry;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\QuestionResource\RelationManagers;
+use Illuminate\Support\Facades\Cache;
+
 
 class QuestionResource extends Resource
 {
@@ -110,12 +112,18 @@ class QuestionResource extends Resource
             ->actions([
                 ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-   Tables\Actions\DeleteAction::make(),
+   Tables\Actions\DeleteAction::make()
+   ->after(function () {
+        \Illuminate\Support\Facades\Cache::forget('questions_with_answers');
+    }),
 
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                    ->after(function () {
+        \Illuminate\Support\Facades\Cache::forget('questions_with_answers');
+    }),
                 ]),
             ])
             ->defaultSort('order');

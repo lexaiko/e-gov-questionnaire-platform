@@ -14,7 +14,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Login Self Assessment</h2>
 

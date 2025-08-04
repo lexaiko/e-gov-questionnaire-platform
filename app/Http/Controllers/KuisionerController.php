@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Answer;
-use App\Models\Question;
 use App\Models\Result;
+use App\Models\Question;
 use App\Models\ResultDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ResultExport;
 use App\Exports\ResultAllExport;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Cache;
+
 class KuisionerController extends Controller
 {
 
@@ -26,7 +28,7 @@ public function download($id)
       ->where('pengguna_id', auth()->id())
       ->firstOrFail();
 
-    return Excel::download(new ResultExport($result), 'hasil_kuisioner.xlsx');
+    return Excel::download(new ResultExport($result), "hasil_{$result->pengguna->name}.xlsx");
 }
 public function exportAdmin($id)
 {
@@ -46,7 +48,10 @@ public function exportAllResults()
 }
     public function index()
     {
-        $questions = Question::with('answers')->orderBy('order')->get();
+        $questions = Cache::rememberForever('questions_with_answers', function () {
+        return Question::with('answers')->orderBy('order')->get();
+        });
+
 
         return Inertia::render('Kuisioner/Index', [
             'questions' => $questions,
@@ -102,7 +107,7 @@ public function exportAllResults()
 
             // 3. Kalkulasi final skor & hasil
             $finalSkor = round($totalSkor / $jumlahSoal, 2);
-            $hasil = $finalSkor < 40 ? 'Kurang' : ($finalSkor < 68 ? 'Cukup' : 'Baik');
+            $hasil = $finalSkor < 44 ? 'Butuh Pembinaan' : ($finalSkor < 77 ? 'Cukup' : 'Baik');
 
             // 4. Update result
             $result->update([

@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\QuestionResource\Pages;
 
-use App\Filament\Resources\QuestionResource;
 use Filament\Actions;
+use Illuminate\Support\Facades\Cache;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\QuestionResource;
 
 class EditQuestion extends EditRecord
 {
@@ -14,6 +15,10 @@ class EditQuestion extends EditRecord
     {
         return [
         ];
+    }
+    protected function afterSave(): void
+    {
+        Cache::forget('questions_with_answers');
     }
 
     //customize redirect after create

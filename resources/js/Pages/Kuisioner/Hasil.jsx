@@ -18,9 +18,9 @@ export default function HasilKuisioner({ result }) {
                         <strong>Hasil:</strong>{" "}
                         <span
                             className={
-                                result.skor_total < 40
+                                result.skor_total < 44
                                     ? "text-red-600"
-                                    : result.skor_total < 68
+                                    : result.skor_total < 77
                                     ? "text-yellow-600"
                                     : "text-green-600"
                             }

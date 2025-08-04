@@ -56,6 +56,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            ->spa()
             ->path('/admin')
             ->when($this->settings->login_enabled ?? true, fn($panel) => $panel->login(Login::class))
             ->when($this->settings->registration_enabled ?? true, fn($panel) => $panel->registration())

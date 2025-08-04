@@ -6,7 +6,7 @@ export default function Landing() {
         <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 bg-white text-center">
             <div className="max-w-xl mx-auto">
                 <img
-                    src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/932aa6ee-a06f-4591-a9d7-1ecbbb989090.png"
+                    src="/jumbotron.webp"
                     alt="Assessment Ilustration"
                     className="w-48 h-48 mb-6 rounded-full border-4 border-yellow-300 shadow-md hover:border-yellow-400 transition-all duration-500 mx-auto"
                 />

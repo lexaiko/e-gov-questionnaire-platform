@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\QuestionResource\Pages;
 
-use App\Filament\Resources\QuestionResource;
 use Filament\Actions;
+use Illuminate\Support\Facades\Cache;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\QuestionResource;
 
 class ListQuestions extends ListRecords
 {
@@ -15,5 +16,14 @@ class ListQuestions extends ListRecords
         return [
             Actions\CreateAction::make(),
         ];
+    }
+    protected function afterDelete(): void
+    {
+        Cache::forget('questions_with_answers');
+    }
+
+    protected function afterBulkDelete(): void
+    {
+        Cache::forget('questions_with_answers');
     }
 }

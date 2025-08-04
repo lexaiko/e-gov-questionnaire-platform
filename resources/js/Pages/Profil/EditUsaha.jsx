@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/react';
+import { useForm, Link } from '@inertiajs/react';
 
 export default function EditUsaha({ profilUsaha }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -60,13 +60,12 @@ export default function EditUsaha({ profilUsaha }) {
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:justify-end sm:space-x-3 mt-6 sm:mt-0">
-                    <button
-                        type="button"
-                        className="w-full sm:w-auto px-5 py-2 rounded-md font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-2 sm:mb-0"
-                        onClick={() => window.location.href = route('profil.index')}
+                    <Link
+                        className="w-full sm:w-auto px-5 py-2 rounded-md font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-2 sm:mb-0 text-center"
+                        href={route('profil.index')}
                     >
                         Kembali
-                    </button>
+                    </Link>
                     <button
                         type="submit"
                         disabled={processing}

@@ -71,9 +71,9 @@ export default function Dashboard({ name, results }) {
                           className="inline-block w-4 h-4 mr-2 rounded-full"
                           style={{
                             backgroundColor:
-                              result.skor_total < 40
+                              result.skor_total < 44
                                 ? 'red'
-                                : result.skor_total < 68
+                                : result.skor_total < 77
                                 ? 'yellow'
                                 : 'green',
                           }}

@@ -1,5 +1,5 @@
 // resources/js/Pages/Kuisioner.jsx
-import { useForm } from '@inertiajs/react';
+import { useForm, Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
 export default function Kuisioner({ questions }) {
@@ -50,19 +50,14 @@ export default function Kuisioner({ questions }) {
         ))}
       </div>
       <div className="flex justify-between">
-        <button
+        <Link
           className="mt-6 bg-gray-500 text-white px-4 py-2 rounded"
-          onClick={() => {
-            if (step === 0) {
-              window.location.href = route('pengguna.dashboard');
-            } else {
-              handleBack();
-            }
-          }}
+          href={step === 0 ? route('pengguna.dashboard') : route('landing')}
+          onClick={handleBack}
           disabled={processing}
         >
           {step === 0 ? 'Kembali' : 'Sebelumnya'}
-        </button>
+        </Link>
         <button
           className="mt-6 bg-yellow-500 text-white px-4 py-2 rounded"
           onClick={handleNext}
