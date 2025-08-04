@@ -29,20 +29,20 @@ class ResultExport implements FromArray, WithHeadings
     public function array(): array
     {
         $row = [
-            $this->result->pengguna->name,
-            $this->result->pengguna->email,
-            $this->result->pengguna->profilUsaha->nama_usaha,
-            $this->result->pengguna->profilUsaha->tahun_bergabung,
-            $this->result->pengguna->profilUsaha->kecamatan,
-            $this->result->pengguna->profilUsaha->nama_pendamping,
+            $this->result->pengguna->name ?? '-',
+            $this->result->pengguna->email ?? '-',
+            $this->result->pengguna->profilUsaha->nama_usaha ?? '-',
+            $this->result->pengguna->profilUsaha->tahun_bergabung ?? '-',
+            $this->result->pengguna->profilUsaha->kecamatan ?? '-',
+            $this->result->pengguna->profilUsaha->nama_pendamping ?? '-',
         ];
 
         foreach ($this->result->resultDetails as $detail) {
-            $row[] = $detail->answer->bobot;
+            $row[] = $detail->answer->bobot ?? '-';
         }
 
-        $row[] = $this->result->skor_total. '%';
-        $row[] = $this->result->hasil;
+        $row[] = $this->result->skor_total. '%' ?? '-';
+        $row[] = $this->result->hasil ?? '-';
 
         return [$row];
     }

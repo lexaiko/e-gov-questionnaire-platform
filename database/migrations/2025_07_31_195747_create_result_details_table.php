@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('result_details', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('result_id')->constrained('results')->onDelete('cascade');
+        $table->uuid('result_id');
+        $table->foreign('result_id')->references('id')->on('results')->onDelete('cascade');
         $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');
         $table->foreignId('answer_id')->constrained('answers')->onDelete('cascade');
         $table->integer('bobot');

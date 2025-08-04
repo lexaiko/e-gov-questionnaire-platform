@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Result;
+use App\Models\ResultDetail;
 use App\Exports\ResultExport;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
@@ -93,7 +94,8 @@ class ResultResource extends Resource
                     Components\TextEntry::make('pengguna.profilUsaha.tahun_bergabung')->label('Tahun Bergabung'),
                     Components\TextEntry::make('pengguna.profilUsaha.kecamatan')->label('Kecamatan'),
                     Components\TextEntry::make('pengguna.profilUsaha.nama_pendamping')->label('Nama Pendamping'),
-                    Components\TextEntry::make('skor_total'),
+                    Components\TextEntry::make('skor_total')
+                        ->formatStateUsing(fn ($state) => "{$state} %"),
                     Components\TextEntry::make('hasil'),
                     Components\TextEntry::make('created_at')->dateTime('d M Y H:i'),
                 ]),
@@ -103,7 +105,8 @@ class ResultResource extends Resource
                     Components\RepeatableEntry::make('resultDetails')
                         ->label('Jawaban')
                         ->schema([
-                            Components\TextEntry::make('question.pertanyaan')->label('Pertanyaan'),
+                            Components\TextEntry::make('question.pertanyaan')
+                                ->label(fn (Result $result, ResultDetail $resultDetail): string => "Pertanyaan {$resultDetail->question->order}"),
                             Components\TextEntry::make('answer.jawaban')->label('Jawaban'),
                             Components\TextEntry::make('bobot')->label('Bobot'),
                         ])

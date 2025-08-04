@@ -4,7 +4,6 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KuisionerController;
 
@@ -53,7 +52,5 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('landing');
 
-
-Route::resource('posts', PostController::class);
 
 

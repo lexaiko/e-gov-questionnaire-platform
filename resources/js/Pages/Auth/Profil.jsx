@@ -41,10 +41,11 @@ export default function Profil() {
         <div className="mb-4">
           <label>Tahun Bergabung</label>
           <input
-            type="date"
+            type="number"
             className="w-full p-2 border rounded"
             value={data.tahun_bergabung}
-            onChange={(e) => setData('tahun_bergabung', e.target.value)}
+            onChange={(e) => setData('tahun_bergabung', e.target.valueAsNumber)}
+            maxLength={4}
             required
           />
           {errors.tahun_bergabung && <p className="text-red-500 text-sm">{errors.tahun_bergabung}</p>}

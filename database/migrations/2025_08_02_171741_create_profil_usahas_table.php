@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('profil_usahas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_usaha');
-            $table->date('tahun_bergabung');
+            $table->year('tahun_bergabung');
             $table->string('kecamatan');
             $table->string('nama_pendamping');
             $table->unsignedBigInteger('pengguna_id'); // foreign key

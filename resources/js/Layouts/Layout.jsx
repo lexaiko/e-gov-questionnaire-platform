@@ -47,7 +47,7 @@ export default function Layout({ children }) {
                                             className="w-8 h-8 rounded-full"
                                         />
                                         <span className="whitespace-nowrap">
-                                            {user.name}
+                                            {user.name.split(" ").slice(0, 2).join(" ")}
                                         </span>
                                     </Link>
                                 ) : (
@@ -142,7 +142,7 @@ export default function Layout({ children }) {
                                         className="w-8 h-8 rounded-full"
                                     />
                                     <span className="whitespace-nowrap">
-                                        {user.name}
+                                        {user.name.split(" ").slice(0, 2).join(" ")}
                                     </span>
                                 </Link>
                             ) : (

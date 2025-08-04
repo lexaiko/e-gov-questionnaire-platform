@@ -41,12 +41,12 @@ class ResultAllExport implements FromArray, WithHeadings
 
         foreach ($this->results as $result) {
             $row = [
-                $result->pengguna->name,
-                $result->pengguna->email,
-                $result->pengguna->profilUsaha->nama_usaha,
-                $result->pengguna->profilUsaha->tahun_bergabung,
-                $result->pengguna->profilUsaha->kecamatan,
-                $result->pengguna->profilUsaha->nama_pendamping,
+                $result->pengguna->name ?? '-',
+                $result->pengguna->email ?? '-',
+                $result->pengguna->profilUsaha->nama_usaha ?? '-',
+                $result->pengguna->profilUsaha->tahun_bergabung ?? '-',
+                $result->pengguna->profilUsaha->kecamatan ?? '-',
+                $result->pengguna->profilUsaha->nama_pendamping ?? '-',
             ];
 
             // Jawaban berdasarkan jumlah soal
@@ -59,8 +59,8 @@ class ResultAllExport implements FromArray, WithHeadings
             $answers = array_pad($answers, Question::count(), '-');
 
             $row = array_merge($row, $answers);
-            $row[] = $result->skor_total . '%';
-            $row[] = $result->hasil;
+            $row[] = ($result->skor_total ?? '-') . '%';
+            $row[] = $result->hasil ?? '-';
 
             $data[] = $row;
         }
@@ -68,5 +68,4 @@ class ResultAllExport implements FromArray, WithHeadings
         return $data;
     }
 }
-
 
