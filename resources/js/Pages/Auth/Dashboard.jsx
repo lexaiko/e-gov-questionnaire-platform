@@ -46,7 +46,7 @@ export default function Dashboard({ name, results }) {
           </Link>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8 bg-white p-5 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-6 text-gray-700">Riwayat Kuisioner Kamu</h2>
 
           {results && results.length > 0 ? (

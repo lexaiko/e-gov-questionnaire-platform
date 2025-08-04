@@ -3,8 +3,8 @@ import { route } from 'ziggy-js';
 
 export default function Landing() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 bg-white text-center">
-            <div className="max-w-xl mx-auto">
+        <div className="flex flex-col  justify-center min-h-screen px-4 sm:px-6 lg:px-8 text-center">
+            <div className=" py-16 w-full md:w-3/4 mx-auto">
                 <img
                     src="/jumbotron.webp"
                     alt="Assessment Ilustration"

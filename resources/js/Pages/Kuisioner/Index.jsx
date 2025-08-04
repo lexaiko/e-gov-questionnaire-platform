@@ -30,7 +30,8 @@ export default function Kuisioner({ questions }) {
   const currentQuestion = questions[step];
 
   return (
-    <div className="h-screen p-6 max-w-xl mx-auto">
+    <div className="pt-32 flex items-center justify-center">
+    <div className="p-6 w-3/4 mx-auto bg-white rounded-lg shadow-md sm:w-2/3">
       <h2 className="text-xl font-semibold mb-4">Pertanyaan {step + 1} dari {questions.length}</h2>
       <p className="mb-4">{currentQuestion.pertanyaan}</p>
       <div className="space-y-2">
@@ -66,6 +67,7 @@ export default function Kuisioner({ questions }) {
           {step === questions.length - 1 ? 'Selesai' : 'Lanjut' }
         </button>
       </div>
+    </div>
     </div>
   );
 }

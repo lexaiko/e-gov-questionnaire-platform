@@ -195,7 +195,7 @@ export default function Layout({ children }) {
             </header>
 
             {/* Main */}
-            <main className="min-h-screen bg-white text-gray-900">
+            <main className="min-h-screen bg-gradient-to-br from-yellow-100 via-pink-50 to-indigo-100 text-gray-900">
                 {children}
             </main>
 

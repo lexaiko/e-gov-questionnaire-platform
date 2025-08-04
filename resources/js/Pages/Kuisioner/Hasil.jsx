@@ -1,7 +1,7 @@
 // resources/js/Pages/Kuisioner/Hasil.jsx
 export default function HasilKuisioner({ result }) {
     return (
-        <div className="max-w-3xl mx-auto p-6">
+        <div className="max-w-3xl mx-auto  p-6 bg-white">
             <h1 className="text-2xl font-bold text-yellow-500">Hasil Assesment</h1>
             <div className="flex items-center justify-between mb-6 shadow rounded-lg p-4">
                 <div className="flex-1">
