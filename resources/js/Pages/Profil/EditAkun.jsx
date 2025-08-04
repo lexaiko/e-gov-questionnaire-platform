@@ -5,6 +5,8 @@ export default function EditAkun({ pengguna }) {
     const { data, setData, put, processing, errors } = useForm({
         name: pengguna.name,
         email: pengguna.email,
+        password: '',
+        password_confirmation: '',
     });
 
     const [clientError, setClientError] = useState('');

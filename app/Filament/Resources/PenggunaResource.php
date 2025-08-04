@@ -8,6 +8,7 @@ use App\Models\Pengguna;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Hash;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -28,8 +29,20 @@ class PenggunaResource extends Resource
         return $form->schema([
             TextInput::make('name')->required(),
             TextInput::make('email')->email()->required(),
-            TextInput::make('password')->password()->required(),
-            TextInput::make('password_confirmation')->password()->label('Konfirmasi Password')->required()->same('password'),
+            TextInput::make('password')
+            ->label('Password')
+            ->password()
+            ->required(fn (string $context) => $context === 'create') // hanya wajib saat create
+            ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
+            ->dehydrated(fn ($state) => filled($state))
+            ->afterStateHydrated(fn (TextInput $component) => $component->state('')),
+
+        TextInput::make('password_confirmation')
+            ->label('Konfirmasi Password')
+            ->password()
+            ->required(fn (string $context) => $context === 'create')
+            ->same('password')
+            ->dehydrated(false),
 
         ]);
     }

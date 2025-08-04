@@ -34,17 +34,27 @@ class ProfilController extends Controller
     }
 
     public function updateAkun(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-        ]);
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'password' => 'nullable|min:8|confirmed',
+    ]);
 
-        $pengguna = Pengguna::findOrFail(Auth::id());
-        $pengguna->update($request->only('name', 'email'));
+    $pengguna = Pengguna::findOrFail(Auth::id());
+    $pengguna->name = $request->name;
+    $pengguna->email = $request->email;
 
-        return redirect()->route('profil.index')->with('success', 'Akun berhasil diperbarui.');
+    // hanya update password kalau diisi
+    if ($request->filled('password')) {
+        $pengguna->password = Hash::make($request->password);
     }
+
+    $pengguna->save();
+
+    return redirect()->route('profil.index')->with('success', 'Akun berhasil diperbarui.');
+}
+
 
     public function editUsaha()
     {
