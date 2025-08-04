@@ -60,7 +60,7 @@ public function register(Request $request)
     $validated = $request->validate([
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'email', 'unique:penggunas,email'],
-        'password' => ['required', 'min:6', 'confirmed'],
+        'password' => ['required', 'min:8', 'confirmed'],
     ]);
 
     // Simpan data akun ke session dulu
