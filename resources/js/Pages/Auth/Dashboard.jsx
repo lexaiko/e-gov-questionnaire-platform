@@ -57,7 +57,8 @@ export default function Dashboard({ name, results }) {
                     <th className="py-3 px-4 border">#</th>
                     <th className="py-3 px-4 border">Tanggal</th>
                     <th className="py-3 px-4 border whitespace-nowrap">Skor (%)</th>
-                    <th className="py-3 px-4 border">Hasil</th>
+                    <th className="py-3 px-4 border">Kategori</th>
+                    <th className="py-3 px-4 border">Rekomendasi</th>
                     <th className="py-3 px-4 border">Aksi</th>
                   </tr>
                 </thead>
@@ -71,16 +72,17 @@ export default function Dashboard({ name, results }) {
                           className="inline-block w-4 h-4 mr-2 rounded-full"
                           style={{
                             backgroundColor:
-                              result.skor_total < 44
+                              result.skor_total < 62
                                 ? 'red'
-                                : result.skor_total < 77
+                                : result.skor_total < 78
                                 ? 'yellow'
                                 : 'green',
                           }}
                         />
                         {result.skor_total} %
                       </td>
-                      <td className="py-3 px-4 border">{result.hasil}</td>
+                      <td className="py-3 px-4 border">{result.kategori}</td>
+                      <td className="py-3 px-4 border">{result.rekomendasi}</td>
                       <td className="py-3 px-4 border">
                         <Link
                           href={route('kuisioner.hasil', { id: result.id })}

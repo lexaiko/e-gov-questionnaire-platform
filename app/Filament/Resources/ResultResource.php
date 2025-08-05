@@ -32,8 +32,24 @@ class ResultResource extends Resource
                 ->required(),
 
             Forms\Components\TextInput::make('skor_total')->required(),
-            Forms\Components\TextInput::make('hasil')->required(),
+            Forms\Components\TextInput::make('kategori')->required(),
+            Forms\Components\TextInput::make('rekomendasi')->required(),
 
+            Forms\Components\Section::make('Detail Jawaban')
+                ->schema([
+                    Forms\Components\Repeater::make('resultDetails')
+                        ->relationship()
+                        ->schema([
+                            Forms\Components\Select::make('question_id')
+                                ->relationship('question', 'pertanyaan')
+                                ->required(),
+                            Forms\Components\Select::make('answer_id')
+                                ->relationship('answer', 'jawaban')
+                                ->required(),
+                            Forms\Components\TextInput::make('bobot')->numeric()->required(),
+                        ])
+                        ->defaultItems(1),
+                ]),
         ]);
     }
 
@@ -60,15 +76,20 @@ class ResultResource extends Resource
                 ->default(0),
             Tables\Columns\TextColumn::make('skor_total')
                 ->formatStateUsing(fn ($state) => "{$state} %"),
-            Tables\Columns\TextColumn::make('hasil'),
+            Tables\Columns\TextColumn::make('kategori'),
+            Tables\Columns\TextColumn::make('rekomendasi'),
             Tables\Columns\TextColumn::make('created_at')->dateTime('d M Y H:i'),
         ])
         ->filters([
-            Tables\Filters\SelectFilter::make('hasil')
+            Tables\Filters\SelectFilter::make('kategori')
                 ->options([
-                    'Baik' => 'Baik',
-                    'Cukup' => 'Cukup',
-                    'Butuh Pembinaan' => 'Butuh Pembinaan',
+                    'Tenaga Kerja Mandiri Profesional
+' => 'Tenaga Kerja Mandiri Profesional
+',
+                    'Tenaga Kerja Mandiri Lanjutan
+' => 'Tenaga Kerja Mandiri Lanjutan
+',
+                    'Tenaga Kerja Mandiri Pemula' => 'Tenaga Kerja Mandiri Pemula',
                 ]),
         ])
         ->actions([
@@ -104,7 +125,8 @@ class ResultResource extends Resource
                     Components\TextEntry::make('pengguna.profilUsaha.nama_pendamping')->label('Nama Pendamping'),
                     Components\TextEntry::make('skor_total')
                         ->formatStateUsing(fn ($state) => "{$state} %"),
-                    Components\TextEntry::make('hasil'),
+                    Components\TextEntry::make('kategori'),
+                    Components\TextEntry::make('rekomendasi'),
                     Components\TextEntry::make('created_at')->dateTime('d M Y H:i'),
                 ]),
 

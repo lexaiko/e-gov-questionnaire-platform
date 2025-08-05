@@ -22,7 +22,8 @@ class ResultExport implements FromArray, WithHeadings
             $headers[] = 'Jawaban ' . ($index + 1);
         }
         $headers[] = 'Total Skor';
-        $headers[] = 'Hasil';
+        $headers[] = 'Kategori';
+        $headers[] = 'Rekomendasi';
         return $headers;
     }
 
@@ -42,7 +43,8 @@ class ResultExport implements FromArray, WithHeadings
         }
 
         $row[] = $this->result->skor_total. '%' ?? '-';
-        $row[] = $this->result->hasil ?? '-';
+        $row[] = $this->result->kategori ?? '-';
+        $row[] = $this->result->rekomendasi ?? '-';
 
         return [$row];
     }

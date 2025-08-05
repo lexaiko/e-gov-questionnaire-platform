@@ -20,12 +20,12 @@ export default function Layout({ children }) {
                                 className="flex items-center gap-2"
                             >
                                 <img
-                                    src="https://github.githubassets.com/favicons/favicon.png"
+                                    src="/header.webp"
                                     alt="Logo"
-                                    className="h-6 sm:h-8"
+                                    className="h-11"
                                 />
                                 <span className="text-base font-semibold text-gray-900 sm:text-xl">
-                                    Self Assessment
+                                    Self Assessment TKM
                                 </span>
                             </Link>
                         </div>
@@ -37,7 +37,7 @@ export default function Layout({ children }) {
                                 {user ? (
                                     <Link
                                         href={route("profil.index")}
-                                        className="bg-transparent border border-yellow-500 text-yellow-500 text-sm font-semibold px-5 py-2 rounded-lg shadow flex items-center gap-3"
+                                        // className="bg-transparent border border-yellow-500 text-yellow-500 text-sm font-semibold px-5 py-2 rounded-lg shadow flex items-center gap-3"
                                     >
                                         <img
                                             src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
@@ -46,9 +46,9 @@ export default function Layout({ children }) {
                                             alt="User Avatar"
                                             className="w-8 h-8 rounded-full"
                                         />
-                                        <span className="whitespace-nowrap">
+                                        {/* <span className="whitespace-nowrap">
                                             {user.name.split(" ").slice(0, 2).join(" ")}
-                                        </span>
+                                        </span> */}
                                     </Link>
                                 ) : (
                                     <Link

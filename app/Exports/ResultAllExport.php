@@ -31,7 +31,8 @@ class ResultAllExport implements FromArray, WithHeadings
             $headers[] = 'Jawaban ' . $i;
         }
         $headers[] = 'Total Skor';
-        $headers[] = 'Hasil';
+        $headers[] = 'Kategori';
+        $headers[] = 'Rekomendasi';
         return $headers;
     }
 
@@ -60,7 +61,8 @@ class ResultAllExport implements FromArray, WithHeadings
 
             $row = array_merge($row, $answers);
             $row[] = ($result->skor_total ?? '-') . '%';
-            $row[] = $result->hasil ?? '-';
+            $row[] = $result->kategori ?? '-';
+            $row[] = $result->rekomendasi ?? '-';
 
             $data[] = $row;
         }

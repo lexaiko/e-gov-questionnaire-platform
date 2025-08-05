@@ -15,7 +15,8 @@ return new class extends Migration
         $table->uuid('id')->primary();
         $table->foreignId('pengguna_id')->constrained('penggunas')->onDelete('cascade');
         $table->string('skor_total');
-        $table->string('hasil'); // misal: "Rendah", "Sedang", "Tinggi"
+        $table->string('kategori');
+        $table->string('rekomendasi');
         $table->timestamps();
     });
     }

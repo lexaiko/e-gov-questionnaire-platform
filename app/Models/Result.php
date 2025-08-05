@@ -10,7 +10,7 @@ class Result extends Model
     public $incrementing = false; // karena pakai UUID
     protected $keyType = 'string'; // UUID adalah string
 
-    protected $fillable = ['pengguna_id', 'skor_total', 'hasil'];
+    protected $fillable = ['pengguna_id', 'skor_total', 'kategori', 'rekomendasi'];
 
     public function pengguna()
     {

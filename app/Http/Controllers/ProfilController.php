@@ -58,7 +58,15 @@ class ProfilController extends Controller
 
     public function editUsaha()
     {
-        $profilUsaha = ProfilUsaha::where('pengguna_id', Auth::id())->firstOrFail();
+        $profilUsaha = ProfilUsaha::firstOrCreate(
+            ['pengguna_id' => Auth::id()],
+            [
+                'nama_usaha' => '',
+                'tahun_bergabung' => date('Y'), // Set current year as default
+                'kecamatan' => '',
+                'nama_pendamping' => '',
+            ]
+        );
 
         return Inertia::render('Profil/EditUsaha', [
             'profilUsaha' => $profilUsaha,

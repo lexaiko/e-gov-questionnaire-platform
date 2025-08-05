@@ -88,7 +88,8 @@ public function exportAllResults()
             $result = Result::create([
                 'pengguna_id' => $pengguna->id,
                 'skor_total' => 0,
-                'hasil' => '-',
+                'kategori' => '-',
+                'rekomendasi' => '-',
             ]);
 
             // 2. Simpan detail per jawaban & hitung skor
@@ -107,12 +108,17 @@ public function exportAllResults()
 
             // 3. Kalkulasi final skor & hasil
             $finalSkor = round($totalSkor / $jumlahSoal, 2);
-            $hasil = $finalSkor < 44 ? 'Butuh Pembinaan' : ($finalSkor < 77 ? 'Cukup' : 'Baik');
+            $kategori = $finalSkor < 62 ? 'Tenaga Kerja Mandiri Pemula' : ($finalSkor < 78 ? 'Tenaga Kerja Mandiri Lanjutan
+' : 'Tenaga Kerja Mandiri Profesional');
+            $rekomendasi = $finalSkor < 62 ? 'Perlu Pendampingan Dasar dari Pendamping di Suku Dinas TKTE
+' : ($finalSkor < 78 ? 'Diusulkan Mengikuti Pembinaan Non Teknis di Tingkat Provinsi
+' : 'Diusulkan Mengikuti Pendampingan di Provinsi');
 
             // 4. Update result
             $result->update([
                 'skor_total' => $finalSkor,
-                'hasil' => $hasil,
+                'kategori' => $kategori,
+                'rekomendasi' => $rekomendasi,
             ]);
 
             DB::commit();

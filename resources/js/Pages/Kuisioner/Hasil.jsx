@@ -12,60 +12,25 @@ export default function HasilKuisioner({ result }) {
                         <strong>Email:</strong> {result.pengguna.email}
                     </p>
                     <p>
-                        <strong>Skor Tata kelola usaha:</strong> {result.skor_total}% <span
-                            className={
-                                result.skor_total < 44
-                                    ? "text-red-600"
-                                    : result.skor_total < 77
-                                    ? "text-yellow-600"
-                                    : "text-green-600"
-                            }
-                        >
-                            {result.hasil}
-                        </span>
-                    </p>
-                    <p>
-                        <strong>Skor Tata kelola produksi:</strong> {result.skor_total}% <span
-                            className={
-                                result.skor_total < 44
-                                    ? "text-red-600"
-                                    : result.skor_total < 77
-                                    ? "text-yellow-600"
-                                    : "text-green-600"
-                            }
-                        >
-                            {result.hasil}
-                        </span>
-                    </p>
-                    <p>
-                        <strong>Skor Tata kelola pemasaran:</strong> {result.skor_total}% <span
-                            className={
-                                result.skor_total < 44
-                                    ? "text-red-600"
-                                    : result.skor_total < 77
-                                    ? "text-yellow-600"
-                                    : "text-green-600"
-                            }
-                        >
-                            {result.hasil}
-                        </span>
-                    </p>
-                    <p>
-                        <strong>Total Skor:</strong> {result.skor_total}%
-                    </p>
-                    <p>
-                        <strong>Hasil:</strong>{" "}
+                        <strong>Total Skor:</strong>{" "}
                         <span
                             className={
-                                result.skor_total < 44
+                                result.skor_total < 62
                                     ? "text-red-600"
-                                    : result.skor_total < 77
+                                    : result.skor_total < 78
                                     ? "text-yellow-600"
                                     : "text-green-600"
                             }
-                        >
-                            {result.hasil}
+                        >{result.skor_total}%
                         </span>
+                    </p>
+                    <p>
+                        <strong>Kategori:</strong>{" "}
+                            {result.kategori}
+                    </p>
+                    <p>
+                        <strong>Rekomendasi:</strong>{" "}
+                            {result.rekomendasi}
                     </p>
                 </div>
                 <button
