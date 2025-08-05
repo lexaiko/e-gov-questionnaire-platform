@@ -34,7 +34,6 @@ class ResultResource extends Resource
             Forms\Components\TextInput::make('skor_total')->required(),
             Forms\Components\TextInput::make('hasil')->required(),
 
-
         ]);
     }
 
@@ -52,6 +51,8 @@ class ResultResource extends Resource
                 ->searchable(),
             Tables\Columns\TextColumn::make('pengguna.profilUsaha.nama_usaha')->label('Nama Usaha')
                 ->searchable(),
+            Tables\Columns\TextColumn::make('pengguna.profilUsaha.tahun_bergabung')->label('Tahun Bergabung')
+                ->searchable(),
             TextColumn::make('result_details_count')
     ->counts('resultDetails')
     ->label('Jumlah Jawaban')
@@ -61,6 +62,14 @@ class ResultResource extends Resource
                 ->formatStateUsing(fn ($state) => "{$state} %"),
             Tables\Columns\TextColumn::make('hasil'),
             Tables\Columns\TextColumn::make('created_at')->dateTime('d M Y H:i'),
+        ])
+        ->filters([
+            Tables\Filters\SelectFilter::make('hasil')
+                ->options([
+                    'Baik' => 'Baik',
+                    'Cukup' => 'Cukup',
+                    'Butuh Pembinaan' => 'Butuh Pembinaan',
+                ]),
         ])
         ->actions([
             Tables\Actions\Action::make('export_excel')
@@ -77,12 +86,11 @@ class ResultResource extends Resource
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
                 Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ])
+            ]),        ])
         ->defaultSort('created_at', 'desc');
     }
 
-    // 🧾 INFO VIEW (Liat detail + list jawaban)
+    // INFO VIEW (Liat detail + list jawaban)
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist->schema([
@@ -126,3 +134,4 @@ class ResultResource extends Resource
         ];
     }
 }
+

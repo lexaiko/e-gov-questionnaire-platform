@@ -54,7 +54,6 @@ class PenggunaResource extends Resource
                 ->label('No')
                 ->rowIndex(),
             Tables\Columns\ImageColumn::make('avatar_url')
-                        ->searchable()
                         ->circular()
                         ->grow(false)
                         ->getStateUsing(fn($record) => $record->avatar_url
