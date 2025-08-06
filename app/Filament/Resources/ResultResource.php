@@ -78,7 +78,10 @@ class ResultResource extends Resource
                 ->formatStateUsing(fn ($state) => "{$state} %"),
             Tables\Columns\TextColumn::make('kategori'),
             Tables\Columns\TextColumn::make('rekomendasi'),
-            Tables\Columns\TextColumn::make('created_at')->dateTime('d M Y H:i'),
+            Tables\Columns\TextColumn::make('created_at')->dateTime('d M Y H:i')
+                ->label('Tanggal Dibuat')
+                ->sortable()
+                ->toggleable(),
         ])
         ->filters([
             Tables\Filters\SelectFilter::make('kategori')

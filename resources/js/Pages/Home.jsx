@@ -11,11 +11,10 @@ export default function Landing() {
                     className="w-48 h-48 mb-6 rounded-full border-4 border-yellow-300 shadow-md hover:border-yellow-400 transition-all duration-500 mx-auto"
                 />
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-                    Tingkatkan Bisnismu
+                    Bagaimana Posisi Usahamu Saat ini?
                 </h1>
                 <p className="text-base sm:text-lg text-gray-700 mb-8">
-                    Temukan keunggulan dan area yang perlu ditingkatkan dengan kuisioner sederhana.<br />
-                    Hasilkan laporan akurat dan lengkap.
+                    Self Assessment Tenaga Kerja Mandiri Dinas Tenaga Kerja Transmigrasi dan Energi Provinsi DKI Jakarta
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                     <Link
